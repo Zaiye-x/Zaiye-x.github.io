@@ -669,15 +669,31 @@ let lifeVideoSuspendsBackground = false;
 
 const backgroundAudio = document.querySelector("[data-background-audio]");
 const musicToggle = document.querySelector("[data-music-toggle]");
+const audioEntry = document.querySelector("[data-audio-entry]");
+const audioEntryButton = document.querySelector("[data-audio-entry-button]");
+const mainContent = document.querySelector("main");
+const backgroundMusicStorageKey = "background-music-v2";
 let backgroundMusicEnabled = true;
 
 try {
-  backgroundMusicEnabled = window.localStorage.getItem("background-music") !== "off";
+  backgroundMusicEnabled =
+    window.localStorage.getItem(backgroundMusicStorageKey) !== "off";
 } catch {
   backgroundMusicEnabled = true;
 }
 
 backgroundAudio.volume = 0.28;
+
+function setAudioEntryOpen(isOpen) {
+  audioEntry.hidden = !isOpen;
+  document.body.classList.toggle("audio-entry-open", isOpen);
+  header.inert = isOpen;
+  mainContent.inert = isOpen;
+
+  if (isOpen) {
+    window.requestAnimationFrame(() => audioEntryButton.focus({ preventScroll: true }));
+  }
+}
 
 function updateMusicToggle() {
   const actionLabel = backgroundMusicEnabled ? "关闭背景音乐" : "播放背景音乐";
@@ -695,20 +711,31 @@ function syncBackgroundAudio() {
 
   if (!backgroundMusicEnabled || lifeVideoSuspendsBackground) {
     backgroundAudio.pause();
+    setAudioEntryOpen(false);
     updateMusicToggle();
     return;
   }
 
   const playback = backgroundAudio.play();
   if (playback) {
-    playback.then(updateMusicToggle).catch(updateMusicToggle);
+    playback
+      .then(() => {
+        setAudioEntryOpen(false);
+        updateMusicToggle();
+      })
+      .catch((error) => {
+        if (error?.name === "NotAllowedError") {
+          setAudioEntryOpen(true);
+        }
+        updateMusicToggle();
+      });
   }
 }
 
 function setBackgroundMusicEnabled(isEnabled) {
   backgroundMusicEnabled = isEnabled;
   try {
-    window.localStorage.setItem("background-music", isEnabled ? "on" : "off");
+    window.localStorage.setItem(backgroundMusicStorageKey, isEnabled ? "on" : "off");
   } catch {
     // Playback still works when storage is unavailable.
   }
@@ -804,32 +831,24 @@ lifeVideo.addEventListener("ended", () => {
 });
 
 musicToggle.addEventListener("click", () => {
+  if (
+    backgroundMusicEnabled &&
+    backgroundAudio.paused &&
+    !lifeVideoSuspendsBackground
+  ) {
+    syncBackgroundAudio();
+    return;
+  }
+
   setBackgroundMusicEnabled(!backgroundMusicEnabled);
+});
+
+audioEntryButton.addEventListener("click", () => {
+  setBackgroundMusicEnabled(true);
 });
 
 backgroundAudio.addEventListener("play", updateMusicToggle);
 backgroundAudio.addEventListener("pause", updateMusicToggle);
-
-function unlockBackgroundAudio(event) {
-  if (
-    !backgroundMusicEnabled ||
-    lifeVideoSuspendsBackground ||
-    event.target.closest("[data-life-index]")
-  ) {
-    return;
-  }
-
-  syncBackgroundAudio();
-}
-
-function stopListeningForAudioUnlock() {
-  document.removeEventListener("click", unlockBackgroundAudio);
-  document.removeEventListener("keydown", unlockBackgroundAudio);
-}
-
-document.addEventListener("click", unlockBackgroundAudio);
-document.addEventListener("keydown", unlockBackgroundAudio);
-backgroundAudio.addEventListener("play", stopListeningForAudioUnlock, { once: true });
 syncBackgroundAudio();
 
 document.addEventListener("keydown", (event) => {
