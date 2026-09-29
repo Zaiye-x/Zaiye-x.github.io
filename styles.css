@@ -43,65 +43,6 @@ body.dialog-open {
   overflow: hidden;
 }
 
-body.audio-entry-open {
-  overflow: hidden;
-}
-
-.audio-entry {
-  position: fixed;
-  z-index: 120;
-  inset: 0;
-  display: flex;
-  align-items: flex-end;
-  justify-content: space-between;
-  padding: 48px;
-  background: rgba(12, 25, 23, 0.98);
-  color: var(--white);
-}
-
-.audio-entry[hidden] {
-  display: none;
-}
-
-.audio-entry-brand {
-  display: grid;
-  gap: 8px;
-}
-
-.audio-entry-brand span {
-  color: var(--acid);
-  font-size: 12px;
-  font-weight: 700;
-}
-
-.audio-entry-brand strong {
-  font-family: var(--display);
-  font-size: 48px;
-  line-height: 1;
-}
-
-.audio-entry button {
-  display: inline-flex;
-  min-width: 156px;
-  min-height: 52px;
-  align-items: center;
-  justify-content: space-between;
-  gap: 24px;
-  padding: 0 18px;
-  border: 1px solid var(--acid);
-  border-radius: 0;
-  background: var(--acid);
-  color: var(--forest);
-  cursor: pointer;
-  font-weight: 800;
-}
-
-.audio-entry button:hover,
-.audio-entry button:focus-visible {
-  background: var(--white);
-  border-color: var(--white);
-}
-
 button,
 a {
   -webkit-tap-highlight-color: transparent;
@@ -2161,22 +2102,6 @@ main > section {
 @media (max-width: 760px) {
   :root {
     --page: calc(100vw - 40px);
-  }
-
-  .audio-entry {
-    align-items: stretch;
-    flex-direction: column;
-    justify-content: flex-end;
-    gap: 32px;
-    padding: 24px 20px 32px;
-  }
-
-  .audio-entry-brand strong {
-    font-size: 36px;
-  }
-
-  .audio-entry button {
-    width: 100%;
   }
 
   .site-header {
