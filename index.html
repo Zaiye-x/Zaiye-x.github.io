@@ -1,0 +1,399 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="吴益博的个人作品集，记录 AI 产品、工具开发与生活片段。"
+    />
+    <meta name="theme-color" content="#0c1917" />
+    <title>吴益博 | AI 产品与体验设计</title>
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <a class="skip-link" href="#about">跳到主要内容</a>
+
+    <header class="site-header" data-header>
+      <a class="wordmark" href="#about" aria-label="返回首页">
+        <span class="wordmark-dot" aria-hidden="true"></span>
+        <span>吴益博</span>
+      </a>
+
+      <nav class="desktop-nav" aria-label="主导航">
+        <a href="#about">关于我</a>
+        <a href="#experience">过往经历</a>
+        <a href="#tools">工具开发</a>
+        <a href="#life">生活切片</a>
+      </nav>
+
+      <div class="header-actions">
+        <button
+          class="music-toggle"
+          type="button"
+          aria-label="关闭背景音乐"
+          aria-pressed="true"
+          title="关闭背景音乐"
+          data-music-toggle
+        >
+          <svg
+            class="music-toggle-on"
+            aria-hidden="true"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          >
+            <path d="M11 5 6 9H2v6h4l5 4V5Z"></path>
+            <path d="M15.54 8.46a5 5 0 0 1 0 7.07"></path>
+            <path d="M19.07 4.93a10 10 0 0 1 0 14.14"></path>
+          </svg>
+          <svg
+            class="music-toggle-off"
+            aria-hidden="true"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          >
+            <path d="M11 5 6 9H2v6h4l5 4V5Z"></path>
+            <path d="m22 9-6 6"></path>
+            <path d="m16 9 6 6"></path>
+          </svg>
+        </button>
+
+        <button
+          class="menu-toggle"
+          type="button"
+          aria-expanded="false"
+          aria-controls="mobile-menu"
+          data-menu-toggle
+        >
+          <span>目录</span>
+          <span class="menu-lines" aria-hidden="true"></span>
+        </button>
+      </div>
+    </header>
+
+    <div class="mobile-menu" id="mobile-menu" data-mobile-menu hidden>
+      <nav aria-label="移动端导航">
+        <a href="#about"><span>01</span>关于我</a>
+        <a href="#experience"><span>02</span>过往经历</a>
+        <a href="#tools"><span>03</span>工具开发</a>
+        <a href="#life"><span>04</span>生活切片</a>
+      </nav>
+    </div>
+
+    <main>
+      <section
+        class="scroll-story"
+        id="about"
+        aria-labelledby="story-title"
+        data-scroll-story
+      >
+        <div class="story-sticky">
+          <div class="story-media" aria-hidden="true">
+            <video
+              class="story-video"
+              data-story-video
+              muted
+              playsinline
+              preload="auto"
+              poster="./图片素材/正面.jpeg"
+              tabindex="-1"
+            >
+              <source
+                src="./视频素材/人物多角度连贯视频制作-滚动优化.mp4"
+                type="video/mp4"
+              />
+            </video>
+          </div>
+
+          <div class="story-shade" aria-hidden="true"></div>
+
+          <div class="story-topline" aria-label="作品集信息">
+            <span>PERSONAL ARCHIVE / 2026</span>
+            <span>AI PRODUCT × EXPERIENCE</span>
+          </div>
+
+          <div class="story-panels">
+            <article
+              class="story-panel story-panel-front is-active"
+              data-story-panel
+              aria-hidden="false"
+            >
+              <p class="story-eyebrow"><span>01</span> ABOUT ME / 关于我</p>
+              <h1 id="story-title">你好，<br />我是吴益博</h1>
+              <p class="story-summary">
+                喜欢研究组合不同领域的技能，<br />
+                用产品、代码与艺术，探索更多可能性。
+              </p>
+              <ul class="story-facts story-facts-about" aria-label="个人关键词">
+                <li>AI Coding</li>
+                <li>工具开发</li>
+                <li>音乐与艺术</li>
+              </ul>
+            </article>
+
+            <article
+              class="story-panel story-panel-right"
+              id="experience"
+              data-story-panel
+              aria-hidden="true"
+              inert
+            >
+              <p class="story-eyebrow"><span>02</span> EXPERIENCE / 过往经历</p>
+              <h2>三段经历，<br />连接产品与创造。</h2>
+              <ol class="experience-timeline" aria-label="过往经历时间线">
+                <li>
+                  <button type="button" data-detail-key="fadada" aria-haspopup="dialog">
+                    <span class="experience-track">法律科技</span>
+                    <span>
+                      <strong>AI 产品经理</strong>
+                      <small>法大大</small>
+                    </span>
+                    <b aria-hidden="true">＋</b>
+                  </button>
+                </li>
+                <li>
+                  <button type="button" data-detail-key="creator" aria-haspopup="dialog">
+                    <span class="experience-track">内容创作</span>
+                    <span>
+                      <strong>AI 领域自媒体博主</strong>
+                      <small>个人媒体</small>
+                    </span>
+                    <b aria-hidden="true">＋</b>
+                  </button>
+                </li>
+                <li>
+                  <button type="button" data-detail-key="lbp" aria-haspopup="dialog">
+                    <span class="experience-track">企业服务</span>
+                    <span>
+                      <strong>LBP 深度服务</strong>
+                      <small>飞书</small>
+                    </span>
+                    <b aria-hidden="true">＋</b>
+                  </button>
+                </li>
+              </ol>
+            </article>
+
+            <article
+              class="story-panel story-panel-up"
+              id="tools"
+              data-story-panel
+              aria-hidden="true"
+              inert
+            >
+              <p class="story-eyebrow"><span>03</span> TOOLS / 工具开发</p>
+              <h2>把想法，<br />做成自己的工具。</h2>
+              <div class="tool-deck" aria-label="工具开发项目">
+                <button type="button" data-detail-key="tool-01" aria-haspopup="dialog">
+                  <span>01</span>
+                  <strong>obsidian-rich-table</strong>
+                  <small>Obsidian 富文本表格插件</small>
+                  <b aria-hidden="true">＋</b>
+                </button>
+                <button type="button" data-detail-key="tool-02" aria-haspopup="dialog">
+                  <span>02</span>
+                  <strong>wechat-info-push</strong>
+                  <small>微信群消息定时归档</small>
+                  <b aria-hidden="true">＋</b>
+                </button>
+                <button type="button" data-detail-key="tool-03" aria-haspopup="dialog">
+                  <span>03</span>
+                  <strong>trae-task-folder-manager</strong>
+                  <small>TRAE SOLO 任务文件夹</small>
+                  <b aria-hidden="true">＋</b>
+                </button>
+              </div>
+            </article>
+
+            <article
+              class="story-panel story-panel-down"
+              id="life"
+              data-story-panel
+              aria-hidden="true"
+              inert
+            >
+              <p class="story-eyebrow"><span>04</span> LIFE / 生活切片</p>
+              <h2>离开屏幕，<br />继续感受与表达。</h2>
+              <p class="story-summary">
+                绘画与音乐，探索内心世界的另一种方式
+              </p>
+              <div class="life-strip" aria-label="生活切片影像">
+                <button
+                  type="button"
+                  data-life-index="0"
+                  aria-haspopup="dialog"
+                  aria-label="播放 Love Yourself 吉他弹唱"
+                >
+                  <img src="./media/love-yourself-poster.png" alt="" />
+                  <span class="life-strip-kind" aria-hidden="true">▶</span>
+                  <span class="life-strip-index">01</span>
+                </button>
+                <button
+                  type="button"
+                  data-life-index="1"
+                  aria-haspopup="dialog"
+                  aria-label="播放 City of Stars 吉他弹唱"
+                >
+                  <img src="./media/city-of-stars-poster.png" alt="" />
+                  <span class="life-strip-kind" aria-hidden="true">▶</span>
+                  <span class="life-strip-index">02</span>
+                </button>
+                <button
+                  type="button"
+                  data-life-index="2"
+                  aria-haspopup="dialog"
+                  aria-label="查看手绘人物习作"
+                >
+                  <img src="./图片素材/画画001.jpg" alt="" />
+                  <span class="life-strip-index">03</span>
+                </button>
+                <button
+                  type="button"
+                  data-life-index="3"
+                  aria-haspopup="dialog"
+                  aria-label="查看冲浪照片"
+                >
+                  <img src="./图片素材/冲浪.jpg" alt="" />
+                  <span class="life-strip-index">04</span>
+                </button>
+              </div>
+            </article>
+          </div>
+
+          <ol class="story-steps" aria-hidden="true">
+            <li class="is-active" data-story-step><span>01</span><b>关于我</b></li>
+            <li data-story-step><span>02</span><b>过往经历</b></li>
+            <li data-story-step><span>03</span><b>工具开发</b></li>
+            <li data-story-step><span>04</span><b>生活切片</b></li>
+          </ol>
+
+          <div class="story-progress" aria-hidden="true">
+            <span data-story-progress></span>
+          </div>
+
+          <div class="story-scroll-cue" aria-hidden="true">
+            <span>继续向下</span>
+            <span class="scroll-line"></span>
+          </div>
+
+          <p class="sr-only" aria-live="polite" data-story-status>
+            当前章节：关于我
+          </p>
+        </div>
+      </section>
+    </main>
+
+    <dialog class="detail-drawer" data-detail-dialog aria-labelledby="detail-title">
+      <div class="detail-drawer-shell">
+        <header class="detail-drawer-header">
+          <span data-detail-counter>01 / 03</span>
+          <div class="detail-drawer-actions">
+            <button
+              type="button"
+              data-detail-previous
+              aria-label="上一个内容"
+              title="上一个内容"
+            >
+              ‹
+            </button>
+            <button
+              type="button"
+              data-detail-next
+              aria-label="下一个内容"
+              title="下一个内容"
+            >
+              ›
+            </button>
+            <button
+              class="dialog-close"
+              type="button"
+              data-detail-close
+              aria-label="关闭详情"
+              title="关闭详情"
+            >
+              ×
+            </button>
+          </div>
+        </header>
+        <div class="detail-drawer-body">
+          <p class="detail-kicker" data-detail-kicker>EXPERIENCE / 过往经历</p>
+          <h2 id="detail-title" data-detail-title>法大大</h2>
+          <p class="detail-role" data-detail-role>AI 产品经理</p>
+          <p class="detail-summary" data-detail-summary>项目经历与代表案例。</p>
+          <figure class="detail-media" data-detail-media hidden>
+            <img src="" alt="" data-detail-image />
+            <figcaption data-detail-media-caption></figcaption>
+          </figure>
+          <div class="detail-fields" data-detail-fields></div>
+          <a
+            class="detail-link"
+            href="#"
+            target="_blank"
+            rel="noreferrer"
+            data-detail-link
+            hidden
+          >
+            <span data-detail-link-label>查看项目</span>
+            <b aria-hidden="true">↗</b>
+          </a>
+        </div>
+        <footer class="detail-drawer-footer">
+          <span data-detail-status>CASE FILE / ARCHIVE</span>
+          <span data-detail-footer>PERSONAL ARCHIVE / 2026</span>
+        </footer>
+      </div>
+    </dialog>
+
+    <dialog class="life-viewer" data-life-dialog aria-labelledby="life-viewer-title">
+      <div class="life-viewer-shell">
+        <button
+          class="dialog-close life-viewer-close"
+          type="button"
+          data-life-close
+          aria-label="关闭影像"
+          title="关闭影像"
+        >
+          ×
+        </button>
+        <figure>
+          <div class="life-viewer-media">
+            <img src="" alt="" data-life-image />
+            <video
+              controls
+              playsinline
+              preload="metadata"
+              data-life-video
+              hidden
+            ></video>
+          </div>
+          <figcaption>
+            <p data-life-counter>01 / 04</p>
+            <h2 id="life-viewer-title" data-life-title>生活切片</h2>
+            <p data-life-description>工作之外，继续感受与表达。</p>
+          </figcaption>
+        </figure>
+        <div class="life-viewer-controls" aria-label="切换生活切片">
+          <button type="button" data-life-previous aria-label="上一张" title="上一张">‹</button>
+          <button type="button" data-life-next aria-label="下一张" title="下一张">›</button>
+        </div>
+      </div>
+    </dialog>
+
+    <audio
+      src="./音频素材/轻背景音乐.mp3"
+      loop
+      preload="auto"
+      data-background-audio
+    ></audio>
+
+    <script src="./script.js"></script>
+  </body>
+</html>
