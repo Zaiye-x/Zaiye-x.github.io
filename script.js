@@ -577,9 +577,7 @@ function openDetail(key, trigger) {
     detailLinkLabel.textContent = "";
   }
 
-  const promoteDetailLink = Boolean(
-    content.link && detailGroups.tools.includes(key),
-  );
+  const promoteDetailLink = Boolean(content.link);
   detailBody.classList.toggle("has-promoted-link", promoteDetailLink);
   detailLink.classList.toggle("is-promoted", promoteDetailLink);
   if (promoteDetailLink) {
