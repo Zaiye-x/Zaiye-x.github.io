@@ -990,6 +990,10 @@ main > section {
   line-height: 1.65;
 }
 
+.detail-drawer-body.has-promoted-link .detail-summary {
+  margin-bottom: 24px;
+}
+
 .detail-media {
   margin: 0 0 42px;
   border: 1px solid var(--line);
@@ -1076,6 +1080,10 @@ main > section {
     background-color 220ms ease,
     color 220ms ease,
     transform 280ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.detail-link.is-promoted {
+  margin: 0 0 32px;
 }
 
 .detail-link:hover,

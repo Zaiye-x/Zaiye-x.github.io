@@ -577,6 +577,17 @@ function openDetail(key, trigger) {
     detailLinkLabel.textContent = "";
   }
 
+  const promoteDetailLink = Boolean(
+    content.link && detailGroups.tools.includes(key),
+  );
+  detailBody.classList.toggle("has-promoted-link", promoteDetailLink);
+  detailLink.classList.toggle("is-promoted", promoteDetailLink);
+  if (promoteDetailLink) {
+    detailSummary.after(detailLink);
+  } else {
+    detailFields.after(detailLink);
+  }
+
   content.fields.forEach(([label, value]) => {
     const row = document.createElement("div");
     const term = document.createElement("dt");
