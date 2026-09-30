@@ -1,6 +1,6 @@
 # zaiye.github.io
 
-吴益博的个人作品集，使用原生 HTML、CSS 和 JavaScript 构建，通过 GitHub Pages 发布。
+吴益博的个人介绍
 
 线上地址：<https://zaiye-x.github.io>
 
