@@ -523,12 +523,16 @@ const detailStatus = document.querySelector("[data-detail-status]");
 const detailFooter = document.querySelector("[data-detail-footer]");
 const detailMedia = document.querySelector("[data-detail-media]");
 const detailImage = document.querySelector("[data-detail-image]");
+const detailImageOpen = document.querySelector("[data-detail-image-open]");
 const detailMediaCaption = document.querySelector("[data-detail-media-caption]");
 const detailLink = document.querySelector("[data-detail-link]");
 const detailLinkLabel = document.querySelector("[data-detail-link-label]");
 const detailBody = document.querySelector(".detail-drawer-body");
 const detailPrevious = document.querySelector("[data-detail-previous]");
 const detailNext = document.querySelector("[data-detail-next]");
+const imageZoomDialog = document.querySelector("[data-image-zoom-dialog]");
+const imageZoomImage = document.querySelector("[data-image-zoom-image]");
+const imageZoomCaption = document.querySelector("[data-image-zoom-caption]");
 const detailGroups = {
   experience: ["fadada", "creator", "lbp"],
   tools: ["tool-01", "tool-02", "tool-03"],
@@ -555,10 +559,12 @@ function openDetail(key, trigger) {
   if (content.media) {
     detailImage.src = content.media.src;
     detailImage.alt = content.media.alt;
+    detailImageOpen.setAttribute("aria-label", `放大查看：${content.media.alt}`);
     detailMediaCaption.textContent = content.media.caption;
   } else {
     detailImage.removeAttribute("src");
     detailImage.alt = "";
+    detailImageOpen.setAttribute("aria-label", "放大查看详情图片");
     detailMediaCaption.textContent = "";
   }
 
@@ -597,6 +603,16 @@ function openDetail(key, trigger) {
   if (!detailDialog.open) detailDialog.showModal();
 }
 
+function openDetailImage() {
+  const imageSource = detailImage.currentSrc || detailImage.src;
+  if (detailMedia.hidden || !imageSource) return;
+
+  imageZoomImage.src = imageSource;
+  imageZoomImage.alt = detailImage.alt;
+  imageZoomCaption.textContent = detailMediaCaption.textContent;
+  if (!imageZoomDialog.open) imageZoomDialog.showModal();
+}
+
 function navigateDetail(direction) {
   const group = Object.values(detailGroups).find((keys) => keys.includes(activeDetailKey));
   if (!group) return;
@@ -612,9 +628,25 @@ document.querySelectorAll("[data-detail-key]").forEach((button) => {
 
 detailPrevious.addEventListener("click", () => navigateDetail(-1));
 detailNext.addEventListener("click", () => navigateDetail(1));
+detailImageOpen.addEventListener("click", openDetailImage);
 
 document.querySelector("[data-detail-close]").addEventListener("click", () => {
   detailDialog.close();
+});
+
+document.querySelector("[data-image-zoom-close]").addEventListener("click", () => {
+  imageZoomDialog.close();
+});
+
+imageZoomDialog.addEventListener("click", (event) => {
+  if (event.target === imageZoomDialog) imageZoomDialog.close();
+});
+
+imageZoomDialog.addEventListener("close", () => {
+  imageZoomImage.removeAttribute("src");
+  imageZoomImage.alt = "";
+  imageZoomCaption.textContent = "";
+  window.requestAnimationFrame(() => detailImageOpen.focus());
 });
 
 detailDialog.addEventListener("click", (event) => {
@@ -897,6 +929,8 @@ backgroundAudio.addEventListener("play", stopListeningForAudioUnlock, { once: tr
 syncBackgroundAudio();
 
 document.addEventListener("keydown", (event) => {
+  if (imageZoomDialog.open) return;
+
   if (detailDialog.open) {
     if (event.key === "ArrowLeft") navigateDetail(-1);
     if (event.key === "ArrowRight") navigateDetail(1);

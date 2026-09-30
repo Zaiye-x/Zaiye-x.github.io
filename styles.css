@@ -868,7 +868,8 @@ main > section {
 }
 
 .detail-drawer,
-.life-viewer {
+.life-viewer,
+.image-zoom {
   width: 100%;
   max-width: none;
   height: 100%;
@@ -881,7 +882,8 @@ main > section {
 }
 
 .detail-drawer::backdrop,
-.life-viewer::backdrop {
+.life-viewer::backdrop,
+.image-zoom::backdrop {
   background: rgba(3, 10, 9, 0.72);
   backdrop-filter: blur(8px);
 }
@@ -998,11 +1000,28 @@ main > section {
   display: none;
 }
 
+.detail-media-trigger {
+  display: block;
+  width: 100%;
+  padding: 0;
+  overflow: hidden;
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+  cursor: zoom-in;
+}
+
 .detail-media img {
   width: 100%;
   max-height: 320px;
   aspect-ratio: 16 / 10;
   object-fit: contain;
+  transition: transform 240ms ease;
+}
+
+.detail-media-trigger:hover img,
+.detail-media-trigger:focus-visible img {
+  transform: scale(1.015);
 }
 
 .detail-media figcaption {
@@ -1077,6 +1096,58 @@ main > section {
 
 .detail-drawer :focus-visible {
   outline-color: var(--forest);
+}
+
+.image-zoom {
+  overflow: hidden;
+  padding: 48px;
+  background: rgba(5, 13, 12, 0.98);
+  color: var(--white);
+}
+
+.image-zoom[open] {
+  display: grid;
+  place-items: center;
+}
+
+.image-zoom-close {
+  position: absolute;
+  z-index: 2;
+  top: 24px;
+  right: 24px;
+  color: var(--white);
+}
+
+.image-zoom-close:hover,
+.image-zoom-close:focus-visible {
+  background: var(--acid);
+  color: var(--forest);
+}
+
+.image-zoom figure {
+  display: grid;
+  max-width: 100%;
+  max-height: 100%;
+  justify-items: center;
+  gap: 14px;
+  margin: 0;
+}
+
+.image-zoom img {
+  width: auto;
+  height: auto;
+  max-width: calc(100vw - 96px);
+  max-height: calc(100svh - 130px);
+  object-fit: contain;
+}
+
+.image-zoom figcaption {
+  max-width: min(760px, calc(100vw - 96px));
+  color: rgba(255, 255, 255, 0.7);
+  font-size: 11px;
+  font-weight: 700;
+  line-height: 1.5;
+  text-align: center;
 }
 
 .life-viewer {
@@ -2362,6 +2433,24 @@ main > section {
     grid-template-columns: 76px minmax(0, 1fr);
     gap: 12px;
     padding: 15px 0;
+  }
+
+  .image-zoom {
+    padding: 64px 16px 24px;
+  }
+
+  .image-zoom-close {
+    top: 12px;
+    right: 12px;
+  }
+
+  .image-zoom img {
+    max-width: calc(100vw - 32px);
+    max-height: calc(100svh - 118px);
+  }
+
+  .image-zoom figcaption {
+    max-width: calc(100vw - 32px);
   }
 
   .life-viewer-shell {

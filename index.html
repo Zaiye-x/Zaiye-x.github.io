@@ -329,7 +329,15 @@
           <p class="detail-role" data-detail-role>AI 产品经理</p>
           <p class="detail-summary" data-detail-summary>项目经历与代表案例。</p>
           <figure class="detail-media" data-detail-media hidden>
-            <img src="" alt="" data-detail-image />
+            <button
+              class="detail-media-trigger"
+              type="button"
+              data-detail-image-open
+              aria-haspopup="dialog"
+              aria-label="放大查看详情图片"
+            >
+              <img src="" alt="" data-detail-image />
+            </button>
             <figcaption data-detail-media-caption></figcaption>
           </figure>
           <div class="detail-fields" data-detail-fields></div>
@@ -350,6 +358,26 @@
           <span data-detail-footer>PERSONAL ARCHIVE / 2026</span>
         </footer>
       </div>
+    </dialog>
+
+    <dialog
+      class="image-zoom"
+      data-image-zoom-dialog
+      aria-labelledby="image-zoom-caption"
+    >
+      <button
+        class="dialog-close image-zoom-close"
+        type="button"
+        data-image-zoom-close
+        aria-label="关闭图片预览"
+        title="关闭图片预览"
+      >
+        ×
+      </button>
+      <figure>
+        <img alt="" data-image-zoom-image />
+        <figcaption id="image-zoom-caption" data-image-zoom-caption></figcaption>
+      </figure>
     </dialog>
 
     <dialog class="life-viewer" data-life-dialog aria-labelledby="life-viewer-title">
