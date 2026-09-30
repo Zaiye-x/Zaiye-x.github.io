@@ -671,6 +671,7 @@ const backgroundAudio = document.querySelector("[data-background-audio]");
 const musicToggle = document.querySelector("[data-music-toggle]");
 const backgroundMusicStorageKey = "background-music-v2";
 let backgroundMusicEnabled = true;
+let backgroundAudioBlocked = false;
 
 try {
   backgroundMusicEnabled =
@@ -697,6 +698,7 @@ function syncBackgroundAudio() {
 
   if (!backgroundMusicEnabled || lifeVideoSuspendsBackground) {
     backgroundAudio.pause();
+    backgroundAudioBlocked = false;
     updateMusicToggle();
     return;
   }
@@ -704,8 +706,14 @@ function syncBackgroundAudio() {
   const playback = backgroundAudio.play();
   if (playback) {
     playback
-      .then(updateMusicToggle)
-      .catch(updateMusicToggle);
+      .then(() => {
+        backgroundAudioBlocked = false;
+        updateMusicToggle();
+      })
+      .catch((error) => {
+        backgroundAudioBlocked = error?.name === "NotAllowedError";
+        updateMusicToggle();
+      });
   }
 }
 
@@ -824,24 +832,41 @@ backgroundAudio.addEventListener("play", updateMusicToggle);
 backgroundAudio.addEventListener("pause", updateMusicToggle);
 
 function unlockBackgroundAudio(event) {
+  const target = event.target instanceof Element ? event.target : null;
+
   if (
+    !event.isTrusted ||
     !backgroundMusicEnabled ||
     lifeVideoSuspendsBackground ||
-    event.target.closest?.("[data-life-index]")
+    target?.closest("[data-life-index], [data-music-toggle]") ||
+    (event.type === "keydown" && (event.repeat || event.key === "Escape"))
   ) {
     return;
   }
 
+  if (backgroundAudioBlocked) {
+    backgroundAudio.currentTime = 0;
+  }
   syncBackgroundAudio();
 }
 
+const backgroundAudioUnlockEvents = [
+  "pointerdown",
+  "pointerup",
+  "touchend",
+  "click",
+  "keydown",
+];
+
 function stopListeningForAudioUnlock() {
-  document.removeEventListener("click", unlockBackgroundAudio);
-  document.removeEventListener("keydown", unlockBackgroundAudio);
+  backgroundAudioUnlockEvents.forEach((eventName) => {
+    document.removeEventListener(eventName, unlockBackgroundAudio, true);
+  });
 }
 
-document.addEventListener("click", unlockBackgroundAudio);
-document.addEventListener("keydown", unlockBackgroundAudio);
+backgroundAudioUnlockEvents.forEach((eventName) => {
+  document.addEventListener(eventName, unlockBackgroundAudio, true);
+});
 backgroundAudio.addEventListener("play", stopListeningForAudioUnlock, { once: true });
 syncBackgroundAudio();
 
