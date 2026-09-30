@@ -701,18 +701,10 @@ let lifeVideoSuspendsBackground = false;
 
 const backgroundAudio = document.querySelector("[data-background-audio]");
 const musicToggle = document.querySelector("[data-music-toggle]");
-const backgroundMusicStorageKey = "background-music-v2";
 let backgroundMusicEnabled = true;
 let backgroundAudioBlocked = false;
 let backgroundAudioPlayPending = false;
 let lastBackgroundAudioScrollAttempt = 0;
-
-try {
-  backgroundMusicEnabled =
-    window.localStorage.getItem(backgroundMusicStorageKey) !== "off";
-} catch {
-  backgroundMusicEnabled = true;
-}
 
 backgroundAudio.volume = 0.28;
 
@@ -760,11 +752,6 @@ function syncBackgroundAudio() {
 
 function setBackgroundMusicEnabled(isEnabled) {
   backgroundMusicEnabled = isEnabled;
-  try {
-    window.localStorage.setItem(backgroundMusicStorageKey, isEnabled ? "on" : "off");
-  } catch {
-    // Playback still works when storage is unavailable.
-  }
   syncBackgroundAudio();
 }
 
